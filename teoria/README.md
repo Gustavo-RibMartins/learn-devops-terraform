@@ -26,7 +26,7 @@ Uma das principais vantagens do Terraform é que ele `permite que você gerencie
 terraform init
 ```
 
-* Checagem da infra a ser criada:
+* Checagem da infra a ser criada (exibe o plano de execução):
 
 ```hcl
 terraform plan
@@ -51,3 +51,52 @@ Adicionar a clausula `--auto-approve` para aprovar automaticamente o apply.
 ```hcl
 terraform destroy --auto-approve
 ```
+
+---
+
+## Criando uma instância EC2 na AWS
+
+Exemplo de código:
+
+```hcl
+provider "aws" {
+  region  = "us-east-1"  
+}
+
+resource "aws_instance" "lab_terraform" {
+  ami           = "ami-0a0d9cf81c479446a"  # AMI na AWS
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "lab-terraform"
+  }
+}
+```
+
+* `provider`: provedor do Terraform que usaremos para criar a infra. O Terraform suporta diversos providers em nuvem e local (como Docker por exemplo):
+
+![](./imagens/providers.png)
+
+Ao executar o `terraform init`, foi feito o download das ferramentas necessárias para o terraform se comunicar com a aws (no caso, o aws cli).
+
+É possível passar parâmetros adicionais específicos de cada provider, como no caso da aws, a `region` de trabalho.
+
+* `resource`: recurso criado no provider. No nosso caso, um `aws instance`.
+
+```hcl
+resource "aws_instance" "lab_terraform"
+```
+
+`aws_instance` é o recurso (EC2) e o `lab_terraform` é o nome interno que o terraform atribuirá a esse recurso (não é o nome da instância na AWS, e sim um nome interno para o Terraform tratar o recurso).
+
+Cada resource tem seus próprios parâmetros, podendo ser consultado no [terraform registry](https://registry.terraform.io/).
+
+> **Nome de recursos:** o que configura o nome do recurso na aws, é a tag `name`.
+
+```hcl
+ tags = {
+    Name = "lab-terraform"
+  }
+```
+
+---
