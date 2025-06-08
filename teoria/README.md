@@ -15,3 +15,39 @@ Em vez de configurar manualmente a infraestrutura ou usar scripts ad-hoc, o IaC 
 Com Terraform, você pode escrever código em sua linguagem de programação favorita para descrever sua infraestrutura em termos de recursos, como servidores, redes e volumes de armazenamento. Terraform usa essa descrição para criar e gerenciar esses recursos em vários provedores de nuvem, como AWS, Azure, GCP e outros.
 
 Uma das principais vantagens do Terraform é que ele `permite que você gerencie sua infraestrutura de forma abstrata`, independentemente do provedor de nuvem específico.
+
+---
+
+## Comandos do Terraform
+
+* Iniciando o terraform
+
+```hcl
+terraform init
+```
+
+* Checagem da infra a ser criada:
+
+```hcl
+terraform plan
+```
+
+* Checagem da infra a ser criada:
+
+```hcl
+terraform plan
+```
+
+* Criação da infra:
+
+```hcl
+terraform apply
+```
+
+Adicionar a clausula `--auto-approve` para aprovar automaticamente o apply.
+
+* Destruir a infra criada:
+
+```hcl
+terraform destroy --auto-approve
+```
